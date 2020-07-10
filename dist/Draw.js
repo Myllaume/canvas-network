@@ -45,7 +45,8 @@ Draw.prototype.inscribe = function() {
             break;
         case 'circle':
             const radius = Math.PI * 2;
-            vis.contener.arc(this.xPos, this.yPos, this.width, 0, radius, false);
+            const size = this.width / 2;
+            vis.contener.arc(this.xPos, this.yPos, size, 0, radius, false);
             vis.contener.fill();
             break;
         case 'line':

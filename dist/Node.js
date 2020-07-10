@@ -1,13 +1,16 @@
 function Node() {
-    this.xPos = 0;
-    this.yPos = 0;
     this.scale = 1;
     this.shape = 'circle';
+    this.draw = new Draw();
+    this.xPos = Math.floor(Math.random() * Math.floor(vis.width));
+    this.yPos = Math.floor(Math.random() * Math.floor(vis.height));
+    this.draw.position(this.xPos, this.yPos);
 }
 
 Node.prototype.position = function(x, y) {
     this.xPos = x;
     this.yPos = y;
+    this.draw.position(this.x, this.y);
 }
 
 Node.prototype.weigh = function(number) {
@@ -18,18 +21,16 @@ Node.prototype.model = function(shape) {
     const validShapes = ['box', 'circle'];
 
     if (validShapes.includes(shape)) {
-        this.shape = shape
+        this.shape = shape;
     } else {
         console.error('unknown node shape')
     }
 }
 
-Node.prototype.draw = function() {
-    var draw = new Draw();
-    draw.measure(20 * this.scale);
-    draw.position(this.xPos, this.yPos);
-    draw.model(this.shape);
-    draw.inscribe();
+Node.prototype.inscribe = function() {
+    this.draw.model(this.shape);
+    this.draw.measure(30 * this.scale);
+    this.draw.inscribe();
 }
 
 function linkNodes(nodeOrigin, nodeTarget) {

@@ -45,7 +45,8 @@ Draw.prototype.inscribe = function() {
             break;
         case 'circle':
             const radius = Math.PI * 2;
-            vis.contener.arc(this.xPos, this.yPos, this.width, 0, radius, false);
+            const size = this.width / 2;
+            vis.contener.arc(this.xPos, this.yPos, size, 0, radius, false);
             vis.contener.fill();
             break;
         case 'line':
@@ -56,15 +57,18 @@ Draw.prototype.inscribe = function() {
     }
 }
 function Node() {
-    this.xPos = 0;
-    this.yPos = 0;
     this.scale = 1;
     this.shape = 'circle';
+    this.draw = new Draw();
+    this.xPos = Math.floor(Math.random() * Math.floor(vis.width));
+    this.yPos = Math.floor(Math.random() * Math.floor(vis.height));
+    this.draw.position(this.xPos, this.yPos);
 }
 
 Node.prototype.position = function(x, y) {
     this.xPos = x;
     this.yPos = y;
+    this.draw.position(this.x, this.y);
 }
 
 Node.prototype.weigh = function(number) {
@@ -75,18 +79,16 @@ Node.prototype.model = function(shape) {
     const validShapes = ['box', 'circle'];
 
     if (validShapes.includes(shape)) {
-        this.shape = shape
+        this.shape = shape;
     } else {
         console.error('unknown node shape')
     }
 }
 
-Node.prototype.draw = function() {
-    var draw = new Draw();
-    draw.measure(20 * this.scale);
-    draw.position(this.xPos, this.yPos);
-    draw.model(this.shape);
-    draw.inscribe();
+Node.prototype.inscribe = function() {
+    this.draw.model(this.shape);
+    this.draw.measure(30 * this.scale);
+    this.draw.inscribe();
 }
 
 function linkNodes(nodeOrigin, nodeTarget) {
@@ -108,25 +110,23 @@ function linkNodes(nodeOrigin, nodeTarget) {
 const canvas = document.querySelector('#canvas');
 
 var vis = {
-    contener: canvas.getContext('2d')
+    contener: canvas.getContext('2d'),
+    width: 400,
+    height: 400
 }
 
 var node1 = new Node;
-node1.position(50, 30);
-node1.model('box');
-node1.draw();
+node1.inscribe();
 
 var node2 = new Node;
-node2.position(60, 90);
-node2.draw();
+node2.inscribe();
 
 var node3 = new Node;
-node3.position(120, 30);
-node3.draw();
+node3.inscribe();
 
 var node4 = new Node;
-node4.position(80, 300);
-node4.draw();
+node4.model('box');
+node4.inscribe();
 
 linkNodes(node1, node2);
 linkNodes(node1, node3);

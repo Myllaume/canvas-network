@@ -1,7 +1,7 @@
 {
     "name": "canvas-network",
     "version": "1.0.0",
-    "description": "",
+    "description": "JavaScript pour générer des toiles (nœud et liens) sur un canvas.",
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

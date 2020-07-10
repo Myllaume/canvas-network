@@ -1,25 +1,23 @@
 const canvas = document.querySelector('#canvas');
 
 var vis = {
-    contener: canvas.getContext('2d')
+    contener: canvas.getContext('2d'),
+    width: 400,
+    height: 400
 }
 
 var node1 = new Node;
-node1.position(50, 30);
-node1.model('box');
-node1.draw();
+node1.inscribe();
 
 var node2 = new Node;
-node2.position(60, 90);
-node2.draw();
+node2.inscribe();
 
 var node3 = new Node;
-node3.position(120, 30);
-node3.draw();
+node3.inscribe();
 
 var node4 = new Node;
-node4.position(80, 300);
-node4.draw();
+node4.model('box');
+node4.inscribe();
 
 linkNodes(node1, node2);
 linkNodes(node1, node3);
