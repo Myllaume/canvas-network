@@ -31,3 +31,20 @@ Node.prototype.draw = function() {
     draw.model(this.shape);
     draw.inscribe();
 }
+
+function linkNodes(nodeOrigin, nodeTarget) {
+    var origin = {
+        x: nodeOrigin.xPos,
+        y: nodeOrigin.yPos
+    };
+    var target = {
+        x: nodeTarget.xPos,
+        y: nodeTarget.yPos
+    };
+
+    var line = new Draw();
+    line.positionOrigin(origin.x, origin.y);
+    line.position(target.x, target.y);
+    line.model('line');
+    line.inscribe();
+}

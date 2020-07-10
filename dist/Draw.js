@@ -17,6 +17,11 @@ Draw.prototype.position = function(x, y) {
     this.yPos = y;
 }
 
+Draw.prototype.positionOrigin = function(x, y) {
+    this.xOriginPos = x;
+    this.yOriginPos = y;
+}
+
 Draw.prototype.model = function(shape) {
     const validShapes = ['box', 'circle', 'line'];
 
@@ -33,13 +38,20 @@ Draw.prototype.inscribe = function() {
 
     switch (this.shape) {
         case 'box':
+            // x, y are middle of the box
+            this.xPos -= this.width / 2;
+            this.yPos -= this.height / 2;
             vis.contener.fillRect(this.xPos, this.yPos, this.width, this.height);
             break;
         case 'circle':
             const radius = Math.PI * 2;
             vis.contener.arc(this.xPos, this.yPos, this.width, 0, radius, false);
+            vis.contener.fill();
+            break;
+        case 'line':
+            vis.contener.moveTo(this.xOriginPos, this.yOriginPos);
+            vis.contener.lineTo(this.xPos, this.yPos);
+            vis.contener.stroke();
             break;
     }
-
-    vis.contener.fill();
 }
