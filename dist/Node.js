@@ -1,4 +1,5 @@
 function Node() {
+    this.id = null;
     this.scale = 1;
     this.shape = 'circle';
     this.draw = new Draw();

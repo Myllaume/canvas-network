@@ -1,0 +1,3 @@
+function Graph() {
+    this.nodeBase = [];
+}

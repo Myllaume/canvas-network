@@ -56,7 +56,11 @@ Draw.prototype.inscribe = function() {
             break;
     }
 }
+function Graph() {
+    this.nodeBase = [];
+}
 function Node() {
+    this.id = null;
     this.scale = 1;
     this.shape = 'circle';
     this.draw = new Draw();
@@ -115,19 +119,15 @@ var vis = {
     height: 400
 }
 
-var node1 = new Node;
-node1.inscribe();
+var graph = new Graph();
 
-var node2 = new Node;
-node2.inscribe();
+for (let i = 0; i < 10; i++) {
+    node = new Node;
+    node.id = i;
+    node.inscribe();
+    graph.nodeBase.push(node);
+}
 
-var node3 = new Node;
-node3.inscribe();
-
-var node4 = new Node;
-node4.model('box');
-node4.inscribe();
-
-linkNodes(node1, node2);
-linkNodes(node1, node3);
-linkNodes(node3, node4);
+linkNodes(graph.nodeBase[0],graph.nodeBase[3])
+linkNodes(graph.nodeBase[7],graph.nodeBase[2])
+linkNodes(graph.nodeBase[9],graph.nodeBase[3])
